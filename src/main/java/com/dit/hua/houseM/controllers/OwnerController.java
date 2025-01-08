@@ -37,7 +37,7 @@ public class OwnerController {
     public ResponseEntity<Owner> createOwner(@RequestBody Owner owner) {
         // Validate required fields
         if (owner.getFirstName() == null || owner.getLastName() == null || owner.getUsername() == null ||
-                owner.getPassword() == null || owner.getTPN() == null || owner.getEmail() == null || owner.getPhone() == null) {
+                owner.getPassword() == null || owner.getTpn() == null || owner.getEmail() == null || owner.getPhone() == null) {
             return ResponseEntity.badRequest().body(null);
         }
 
@@ -67,8 +67,8 @@ public class OwnerController {
         if (updatedOwner.getPassword() != null) {
             existingOwner.setPassword(updatedOwner.getPassword());
         }
-        if (updatedOwner.getTPN() != null) {
-            existingOwner.setTPN(updatedOwner.getTPN());
+        if (updatedOwner.getTpn() != null) {
+            existingOwner.setTpn(updatedOwner.getTpn());
         }
         if (updatedOwner.getEmail() != null) {
             existingOwner.setEmail(updatedOwner.getEmail());

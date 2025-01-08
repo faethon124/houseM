@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="properties")
-public class Properties {
+public class Property {
     // fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +20,8 @@ public class Properties {
     @Column(name="zipcode")
     private String zipcode;
 
-    @Column(name="size")
-    private String size;
+    @Column(name="area")
+    private String area;
 
     @Column(name="type")
     private String type;
@@ -29,16 +29,24 @@ public class Properties {
     @Column(name="price")
     private int price;
 
-    public Properties(int id, String address, String city, String zipcode, String size, String type, int price) {
+    @Column(name = "approved", nullable = false)
+    private boolean approved = false;
+
+    @Lob
+    @Column(name = "photos")
+    private byte[] photos; // For storing property photos
+
+    public Property(int id, String address, String city, String zipcode, String size, String type, int price) {
         this.id = id;
         this.address = address;
         this.city = city;
         this.zipcode = zipcode;
-        this.size = size;
+        this.area = area;
         this.type = type;
         this.price = price;
+        this.approved = false;
     }
-    public Properties() {}
+    public Property() {}
 
     public int getId() {
         return id;
@@ -72,12 +80,12 @@ public class Properties {
         this.zipcode = zipcode;
     }
 
-    public String getSize() {
-        return size;
+    public String getArea() {
+        return area;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public String getType() {
@@ -96,6 +104,22 @@ public class Properties {
         this.price = price;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public byte[] getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(byte[] photos) {
+        this.photos = photos;
+    }
+
     @Override
     public String toString() {
         return "Properties{" +
@@ -103,7 +127,7 @@ public class Properties {
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", zipcode='" + zipcode + '\'' +
-                ", size='" + size + '\'' +
+                ", size='" + area + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 '}';
