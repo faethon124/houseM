@@ -4,6 +4,9 @@ import com.dit.hua.houseM.entities.Owner;
 import com.dit.hua.houseM.repositories.OwnerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class OwnerService {
 
@@ -11,6 +14,23 @@ public class OwnerService {
 
     public OwnerService(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
+    }
+
+    public List<Owner> findAll() {
+        return ownerRepository.findAll();
+    }
+
+    public Owner findById(Long id) {
+        Optional<Owner> result = ownerRepository.findById(id);
+        return result.orElseThrow(() -> new RuntimeException("Owner not found with ID: " + id));
+    }
+
+    public Owner save(Owner owner) {
+        return ownerRepository.save(owner);
+    }
+
+    public void deleteById(Long id) {
+        ownerRepository.deleteById(id);
     }
 
     // Other methods...
