@@ -20,7 +20,7 @@ public class Owner {
     private String email;
 
     @Column(name="phone")
-    private int phone;
+    private String phone;
 
 
     @Column (name="password")
@@ -34,7 +34,7 @@ public class Owner {
     //CONSTRUCTORS
     public Owner() {}
 
-    public Owner(String firstName, String lastName, String email, int phone, String password, String username,String TPN) {
+    public Owner(String firstName, String lastName, String email, String phone, String password, String username,String TPN) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -79,11 +79,11 @@ public class Owner {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
