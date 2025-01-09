@@ -47,9 +47,9 @@ public class OwnerService {
                 .orElseThrow(() -> new RuntimeException("Owner not found with email: " + email));
     }
 
-    public Owner findByTaxNumber(String taxNumber) {
-        return ownerRepository.findByTaxNumber(taxNumber)
-                .orElseThrow(() -> new RuntimeException("Owner not found with tax number: " + taxNumber));
+    public Owner findByTpn(String tpn) {
+        return ownerRepository.findByTpn(tpn)
+                .orElseThrow(() -> new RuntimeException("Owner not found with tax number: " + tpn));
     }
 }
 
