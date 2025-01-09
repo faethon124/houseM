@@ -2,6 +2,7 @@ package com.dit.hua.houseM.services;
 
 import com.dit.hua.houseM.entities.Renter;
 import com.dit.hua.houseM.repositories.RenterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class RenterService {
     private final RenterRepository renterRepository;
 
+    @Autowired
     public RenterService(RenterRepository renterRepository) {
         this.renterRepository = renterRepository;
     }

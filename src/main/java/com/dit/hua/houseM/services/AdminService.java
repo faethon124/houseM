@@ -8,6 +8,7 @@ import com.dit.hua.houseM.repositories.AdminRepository;
 import com.dit.hua.houseM.repositories.OwnerRepository;
 import com.dit.hua.houseM.repositories.PropertyRepository;
 import com.dit.hua.houseM.repositories.RenterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class AdminService {
     private final OwnerRepository ownerRepository;
     private final RenterRepository renterRepository;
 
+    @Autowired
     public AdminService(AdminRepository adminRepository, PropertyRepository propertyRepository,
                         OwnerRepository ownerRepository, RenterRepository renterRepository) {
         this.adminRepository = adminRepository;

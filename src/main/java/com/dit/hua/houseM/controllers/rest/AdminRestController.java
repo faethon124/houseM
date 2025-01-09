@@ -5,6 +5,7 @@ import com.dit.hua.houseM.entities.Owner;
 import com.dit.hua.houseM.entities.Property;
 import com.dit.hua.houseM.entities.Renter;
 import com.dit.hua.houseM.services.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class AdminRestController {
 
     private final AdminService adminService;
 
+    @Autowired
     public AdminRestController(AdminService adminService) {
         this.adminService = adminService;
     }

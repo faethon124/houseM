@@ -2,6 +2,7 @@ package com.dit.hua.houseM.services;
 
 import com.dit.hua.houseM.entities.Owner;
 import com.dit.hua.houseM.repositories.OwnerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class OwnerService {
 
     private final OwnerRepository ownerRepository;
 
+    @Autowired
     public OwnerService(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
     }

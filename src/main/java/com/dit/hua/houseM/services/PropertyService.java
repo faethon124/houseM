@@ -2,18 +2,18 @@ package com.dit.hua.houseM.services;
 
 import com.dit.hua.houseM.entities.Property;
 import com.dit.hua.houseM.repositories.PropertyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.List;
+
 @Service
 public class PropertyService {
     private final PropertyRepository propertyRepository;
 
+    @Autowired
     public PropertyService(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
     }
