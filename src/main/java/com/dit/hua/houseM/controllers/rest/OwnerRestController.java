@@ -26,6 +26,11 @@ public class OwnerRestController {
         List<Owner> owners = ownerService.findAll();
         return ResponseEntity.ok(owners);
     }
+    @PostMapping("/new")
+    public Owner addOwner(@RequestBody Owner owner) {
+        // This will add a new owner (without requiring admin privileges)
+        return ownerService.save(owner);
+    }
 
     // Endpoint to get a single owner by ID
     @GetMapping("/{id}")

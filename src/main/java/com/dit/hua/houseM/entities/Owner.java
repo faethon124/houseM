@@ -3,7 +3,7 @@ package com.dit.hua.houseM.entities;
 import jakarta.persistence.*;
 
 @Entity
-@DiscriminatorValue("Owner")
+@DiscriminatorValue("OWNER")
 public class Owner extends BaseUser{
 
 }
