@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RenterRepository extends JpaRepository<Renter, Long> {
+public interface RenterRepository extends JpaRepository<Renter, Integer> {
     // Find renters by username
     List<Renter> findByUsername(String username);
 
