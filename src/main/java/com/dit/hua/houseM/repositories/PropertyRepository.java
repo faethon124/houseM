@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PropertyRepository extends JpaRepository<Property,Integer> {
+public interface PropertyRepository extends JpaRepository<Property,Long> {
 
     // Custom methods
     List<Property> findByArea(String area);
