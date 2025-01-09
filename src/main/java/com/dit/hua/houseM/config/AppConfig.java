@@ -13,12 +13,6 @@ import java.nio.file.Paths;
 @Configuration
 public class AppConfig {
 
-    // Bean for password encoding
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     // Bean for handling multipart file uploads (for property photos)
     @Bean
     public StandardServletMultipartResolver multipartResolver() {
