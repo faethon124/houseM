@@ -18,5 +18,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
     List<Owner> findByApproved(boolean approved);
 
+    List<Owner> findByApprovedTrue();
 }
 

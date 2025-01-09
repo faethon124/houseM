@@ -9,8 +9,10 @@ import java.util.List;
 @Repository
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
-    List<Property> findByAreaBetween(Double minArea, Double maxArea);
+    // Custom methods
+    List<Property> findByArea(String area);
 
-    List<Property> findByApproved(boolean approved);
+    List<Property> findByCity(String city);
 
+    List<Property> findByApprovedFalse(); // For admin to fetch unapproved properties
 }

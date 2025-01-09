@@ -1,4 +1,4 @@
-package com.dit.hua.houseM.controllers;
+package com.dit.hua.houseM.controllers.rest;
 
 
 import com.dit.hua.houseM.entities.Owner;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/owners")
-public class OwnerController {
+public class OwnerRestController {
     private final OwnerService ownerService;
 
-    public OwnerController(OwnerService ownerService) {
+    public OwnerRestController(OwnerService ownerService) {
         this.ownerService = ownerService;
     }
 

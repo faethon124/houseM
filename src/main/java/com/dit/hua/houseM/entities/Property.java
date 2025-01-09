@@ -104,7 +104,7 @@ public class Property {
         this.price = price;
     }
 
-    public boolean isApproved() {
+    public boolean getApproved() {
         return approved;
     }
 
