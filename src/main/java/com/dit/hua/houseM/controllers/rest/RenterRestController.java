@@ -2,6 +2,7 @@ package com.dit.hua.houseM.controllers.rest;
 
 import com.dit.hua.houseM.entities.Renter;
 import com.dit.hua.houseM.services.RenterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class RenterRestController {
 
     private final RenterService renterService;
 
+    @Autowired
     public RenterRestController(RenterService renterService) {
         this.renterService = renterService;
     }

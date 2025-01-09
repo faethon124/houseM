@@ -2,6 +2,7 @@ package com.dit.hua.houseM.controllers.rest;
 
 import com.dit.hua.houseM.entities.Property;
 import com.dit.hua.houseM.services.PropertyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class PropertyRestController {
     private final PropertyService propertyService;
 
+    @Autowired
     public PropertyRestController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
