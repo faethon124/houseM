@@ -20,23 +20,22 @@ public class OwnerRestController {
         this.ownerService = ownerService;
     }
 
-    // Endpoint to get all owners
+
     @GetMapping
-    public ResponseEntity<List<Owner>> getAllOwners() {
-        List<Owner> owners = ownerService.findAll();
-        return ResponseEntity.ok(owners);
+    public List<Owner> getAllOwners() {
+        return ownerService.findAll();  // Make sure this method returns the list of owners
     }
+
+    @GetMapping("/{id}")
+    public Owner getOwnerById(@PathVariable Long id) {
+        return ownerService.findById(id);  // Fetch a specific owner by ID
+    }
+
+
     @PostMapping("/new")
     public Owner addOwner(@RequestBody Owner owner) {
         // This will add a new owner (without requiring admin privileges)
         return ownerService.save(owner);
-    }
-
-    // Endpoint to get a single owner by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Owner> getOwnerById(@PathVariable Long id) {
-        Owner owner = ownerService.findById(id);
-        return ResponseEntity.ok(owner);
     }
 
     // Endpoint to create a new owner
