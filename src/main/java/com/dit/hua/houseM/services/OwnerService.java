@@ -18,7 +18,7 @@ public class OwnerService {
         this.ownerRepository = ownerRepository;
     }
 
-    public List<Owner> findAll() {
+    public List<Owner> findAll( ) {
         return ownerRepository.findAll(); // Ensure this fetches all owners from DB
     }
 
