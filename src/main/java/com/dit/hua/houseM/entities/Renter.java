@@ -10,11 +10,11 @@ public class Renter extends BaseUser{
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinTable (
             name="renters_properties",
-            joinColumns = @JoinColumn(name="renter_id"),
+            joinColumns = @JoinColumn(name="Renter_id"),
             inverseJoinColumns =
-            @JoinColumn(name="properties_id"),
+            @JoinColumn(name="Property_id"),
             uniqueConstraints =
-                    {@UniqueConstraint(columnNames = {"properties_id","renter_id"})}
+                    {@UniqueConstraint(columnNames = {"Property_id","Renter_id"})}
     )
     private List<Property> properties;
 }
