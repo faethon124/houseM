@@ -19,12 +19,13 @@ public class OwnerService {
     }
 
     public List<Owner> findAll() {
-        return ownerRepository.findAll();
+        return ownerRepository.findAll(); // Ensure this fetches all owners from DB
     }
 
+    // Find owner by ID
     public Owner findById(Long id) {
-        Optional<Owner> result = ownerRepository.findById(id);
-        return result.orElseThrow(() -> new RuntimeException("Owner not found with ID: " + id));
+        Optional<Owner> owner = ownerRepository.findById(id);
+        return owner.orElse(null); // If owner exists, return it, otherwise return null
     }
 
     public Owner save(Owner owner) {
