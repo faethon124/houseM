@@ -1,5 +1,5 @@
 package com.dit.hua.houseM.entities;
-
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
@@ -36,6 +36,20 @@ public class Property {
     @Column(name = "photos")
     private byte[] photos; // For storing property photos
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
+    @JoinTable (
+            name="rentied properties",
+            joinColumns = @JoinColumn(name="Property_id"),
+            inverseJoinColumns =
+            @JoinColumn(name="Renter_id"),
+            uniqueConstraints =
+                    {@UniqueConstraint(columnNames = {"Renter_id","Property_id"})}
+    )
+    private List<Renter>renters;
     public Property(int id, String address, String city, String zipcode, String size, String type, int price) {
         this.id = id;
         this.address = address;
@@ -118,6 +132,14 @@ public class Property {
 
     public void setPhotos(byte[] photos) {
         this.photos = photos;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     @Override
