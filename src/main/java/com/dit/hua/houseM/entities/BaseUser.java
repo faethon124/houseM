@@ -2,9 +2,7 @@ package com.dit.hua.houseM.entities;
 
 import jakarta.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Single table for all roles
-@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING) // Discriminator column
+@MappedSuperclass
 public abstract class BaseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
