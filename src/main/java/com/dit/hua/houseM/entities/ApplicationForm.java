@@ -24,20 +24,11 @@ public class ApplicationForm {
     @Column(name="phone")
     private String phone;
 
-    @Column(name="username")
-    private String username;
-
-    @Column(name="password")
-    private String password;
-
     @Column(name="TPN")
     private String TPN;
 
     @Column(name="date")
     private  Date  date;
-
-    @Column(name="katoikia")
-    private String katoikia;
 
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
@@ -54,8 +45,6 @@ public class ApplicationForm {
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.username = username;
-        this.password = password;
         this.TPN = TPN;
         this.date = date;
         this.katoikia = katoikia;
@@ -104,22 +93,6 @@ public class ApplicationForm {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getTPN() {
         return TPN;
     }
@@ -134,14 +107,6 @@ public class ApplicationForm {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getKatoikia() {
-        return katoikia;
-    }
-
-    public void setKatoikia(String katoikia) {
-        this.katoikia = katoikia;
     }
 
     public Renter getRenter() {
@@ -168,11 +133,8 @@ public class ApplicationForm {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", TPN='" + TPN + '\'' +
                 ", date=" + date +
-                ", katoikia='" + katoikia + '\'' +
             '}';
     }
 }
