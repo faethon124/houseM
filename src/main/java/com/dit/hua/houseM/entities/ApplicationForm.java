@@ -47,7 +47,6 @@ public class ApplicationForm {
         this.phone = phone;
         this.TPN = TPN;
         this.date = date;
-        this.katoikia = katoikia;
     }
 
     public ApplicationForm() {

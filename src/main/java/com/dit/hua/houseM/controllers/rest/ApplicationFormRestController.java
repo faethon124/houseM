@@ -1,4 +1,4 @@
-package com.dit.hua.houseM.controllers;
+package com.dit.hua.houseM.controllers.rest;
 
 import com.dit.hua.houseM.entities.ApplicationForm;
 import com.dit.hua.houseM.services.ApplicationFormService;
@@ -10,12 +10,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/application-forms")
-public class ApplicationFormController {
+public class ApplicationFormRestController {
 
     private final ApplicationFormService applicationFormService;
 
     @Autowired
-    public ApplicationFormController(ApplicationFormService applicationFormService) {
+    public ApplicationFormRestController(ApplicationFormService applicationFormService) {
         this.applicationFormService = applicationFormService;
     }
 
