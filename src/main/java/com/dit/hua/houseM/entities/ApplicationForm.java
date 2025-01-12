@@ -2,7 +2,7 @@ package com.dit.hua.houseM.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @Table(name="applicationform")
@@ -38,6 +38,15 @@ public class ApplicationForm {
 
     @Column(name="katoikia")
     private String katoikia;
+
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "renterId")
+    private Renter renter;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "propertyId")
+    private Property property;
 
     public ApplicationForm(int id, String firstName, String lastName, String email, String phone, String username, String password, String TPN, Date date, String katoikia) {
         this.id = id;
@@ -133,6 +142,22 @@ public class ApplicationForm {
 
     public void setKatoikia(String katoikia) {
         this.katoikia = katoikia;
+    }
+
+    public Renter getRenter() {
+        return renter;
+    }
+
+    public void setRenter(Renter renter) {
+        this.renter = renter;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
     @Override

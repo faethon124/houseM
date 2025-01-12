@@ -40,6 +40,14 @@ public class Property {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
+    @OneToOne
+    @JoinColumn(name = "renter_id")
+    private Renter renters;
+
+
+    @OneToMany(mappedBy = "property",cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE})
+    private List<ApplicationForm>applicationForms;
+
     public Property(int id, String address, String city, String zipcode, String size, String type, int price) {
         this.id = id;
         this.address = address;
@@ -130,6 +138,22 @@ public class Property {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public Renter getRenters() {
+        return renters;
+    }
+
+    public void setRenters(Renter renters) {
+        this.renters = renters;
+    }
+
+    public List<ApplicationForm> getApplicationForms() {
+        return applicationForms;
+    }
+
+    public void setApplicationForms(List<ApplicationForm> applicationForms) {
+        this.applicationForms = applicationForms;
     }
 
     @Override

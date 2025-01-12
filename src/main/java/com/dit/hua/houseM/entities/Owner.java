@@ -3,7 +3,6 @@ package com.dit.hua.houseM.entities;
 import jakarta.persistence.*;
 import java.util.List;
 @Entity
-@DiscriminatorValue("OWNER")
 public class Owner extends BaseUser{
    @OneToMany(mappedBy = "owner",cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE})
     private List<Property>properties;
