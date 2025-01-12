@@ -32,11 +32,11 @@ public class ApplicationForm {
 
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "renterId")
+    @JoinColumn(name = "renter_id")
     private Renter renter;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "propertyId")
+    @JoinColumn(name = "property_id")
     private Property property;
 
     public ApplicationForm(int id, String firstName, String lastName, String email, String phone, String username, String password, String TPN, Date date, String katoikia) {
