@@ -40,12 +40,12 @@ public class Property {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "renter_id")
     private Renter renters;
 
 
-    @OneToMany(mappedBy = "property",cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE})
+    @OneToMany(mappedBy = "property",cascade = {CascadeType.ALL})
     private List<ApplicationForm>applicationForms;
 
     public Property(int id, String address, String city, String zipcode, String size, String type, int price) {

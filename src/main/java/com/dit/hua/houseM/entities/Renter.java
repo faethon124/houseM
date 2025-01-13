@@ -6,12 +6,12 @@ import java.util.List;
 
 @Entity
 public class Renter extends BaseUser{
-   @OneToOne
+   @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
    @JoinColumn(name = "Property_id")
     private Property properties;
 
 
-    @OneToMany(mappedBy = "renter",cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE})
+    @OneToMany(mappedBy = "renter",cascade = CascadeType.ALL)
     private List<ApplicationForm>applicationForms;
 
     public Property getProperties() {
