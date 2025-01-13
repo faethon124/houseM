@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface ApplicationFormRepository extends JpaRepository<ApplicationForm, Integer> {
     List<ApplicationForm> findByOwnerId(Long ownerId);
+
+    List<ApplicationForm> findByPropertyId(Long propertyId);
 }
 
