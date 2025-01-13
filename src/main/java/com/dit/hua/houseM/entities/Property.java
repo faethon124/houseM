@@ -36,6 +36,9 @@ public class Property {
     @Column(name = "photos")
     private byte[] photos; // For storing property photos
 
+    @Column
+    private String size;
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "owner_id")
     private Owner owner;
@@ -48,7 +51,7 @@ public class Property {
     @OneToMany(mappedBy = "property",cascade = {CascadeType.ALL})
     private List<ApplicationForm>applicationForms;
 
-    public Property(int id, String address, String city, String zipcode, String size, String type, int price) {
+    public Property(int id, String address, String city, String zipcode, String type, int price,boolean approved,String size) {
         this.id = id;
         this.address = address;
         this.city = city;
@@ -57,6 +60,7 @@ public class Property {
         this.type = type;
         this.price = price;
         this.approved = false;
+        this.size = size;
     }
     public Property() {}
 
@@ -156,6 +160,14 @@ public class Property {
         this.applicationForms = applicationForms;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
         return "Properties{" +
@@ -165,7 +177,8 @@ public class Property {
                 ", zipcode='" + zipcode + '\'' +
                 ", size='" + area + '\'' +
                 ", type='" + type + '\'' +
-                ", price=" + price +
+                ", price=" + price +'\'' +
+                ", approved=" + approved +'\'' +
                 '}';
     }
 }
