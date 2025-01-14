@@ -36,7 +36,7 @@ public class Property {
     @Column(name = "photos")
     private byte[] photos; // For storing property photos
 
-    @Column(name="size")//TODO create controller for find by size
+    @Column
     private String size;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
@@ -179,7 +179,6 @@ public class Property {
                 ", type='" + type + '\'' +
                 ", price=" + price +'\'' +
                 ", approved=" + approved +'\'' +
-                ", size=" + size +'\'' +
                 '}';
     }
 }
