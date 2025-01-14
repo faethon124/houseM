@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
     // Custom query to find an admin by username
-    Admin findByUsername(String username);
-}
+    Admin findFirstBy();}

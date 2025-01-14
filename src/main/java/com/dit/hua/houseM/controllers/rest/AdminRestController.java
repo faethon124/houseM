@@ -21,37 +21,11 @@ public class AdminRestController {
         this.adminService = adminService;
     }
 
-    // CRUD operations for admins
-    @GetMapping
-    public List<Admin> getAllAdmins() {
-        return adminService.findAllAdmins();
-    }
-
     @GetMapping("/{id}")
     public Admin getAdminById(@PathVariable Long id) {
         return adminService.findAdminById(id);
     }
 
-    @PostMapping
-    public Admin addAdmin(@RequestBody Admin admin) {
-        return adminService.saveAdmin(admin);
-    }
-
-    @PutMapping("/{id}")
-    public Admin updateAdmin(@PathVariable Long id, @RequestBody Admin admin) {
-        Admin existingAdmin = adminService.findAdminById(id);
-        existingAdmin.setUsername(admin.getUsername());
-        existingAdmin.setPassword(admin.getPassword());
-        return adminService.saveAdmin(existingAdmin);
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteAdmin(@PathVariable Long id) {
-        adminService.deleteAdmin(id);
-        return "Admin deleted successfully.";
-    }
-
-    // Admin functionality
     @GetMapping("/unapproved-properties")
     public List<Property> getAllUnapprovedProperties() {
         return adminService.findAllUnapprovedProperties();

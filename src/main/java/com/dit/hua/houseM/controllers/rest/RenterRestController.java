@@ -3,6 +3,8 @@ package com.dit.hua.houseM.controllers.rest;
 import com.dit.hua.houseM.entities.Renter;
 import com.dit.hua.houseM.services.RenterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +34,13 @@ public class RenterRestController {
 
     // Find renters by username
     @GetMapping("/by-username")
-    public List<Renter> getRentersByUsername(@RequestParam String username) {
-        return renterService.findByUsername(username);
+    public ResponseEntity<Renter> getRenterByUsername(@RequestParam String username) {
+        try {
+            Renter renter = renterService.findByUsername(username);
+            return ResponseEntity.ok(renter);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if not found
+        }
     }
 
     // Find renters by email

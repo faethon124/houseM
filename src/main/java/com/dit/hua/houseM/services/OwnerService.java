@@ -10,22 +10,18 @@ import java.util.Optional;
 
 @Service
 public class OwnerService {
-
     private final OwnerRepository ownerRepository;
 
-    @Autowired
     public OwnerService(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
     }
 
-    public List<Owner> findAll( ) {
-        return ownerRepository.findAll(); // Ensure this fetches all owners from DB
+    public List<Owner> findAll() {
+        return ownerRepository.findAll();
     }
 
-    // Find owner by ID
     public Owner findById(Long id) {
-        Optional<Owner> owner = ownerRepository.findById(id);
-        return owner.orElse(null); // If owner exists, return it, otherwise return null
+        return ownerRepository.findById(id).orElse(null);
     }
 
     public Owner save(Owner owner) {
@@ -36,21 +32,16 @@ public class OwnerService {
         ownerRepository.deleteById(id);
     }
 
-    // Other methods...
+    public List<Owner> findByFirstNameOrderByFirstNameAsc(String firstName) {
+        return ownerRepository.findByFirstNameOrderByFirstNameAsc(firstName);
+    }
+
+    public List<Owner> findByLastNameOrderByLastNameAsc(String lastName) {
+        return ownerRepository.findByLastNameOrderByLastNameAsc(lastName);
+    }
 
     public Owner findByUsername(String username) {
-        return ownerRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Owner not found with username: " + username));
-    }
-
-    public Owner findByEmail(String email) {
-        return ownerRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Owner not found with email: " + email));
-    }
-
-    public Owner findByTpn(String tpn) {
-        return ownerRepository.findByTpn(tpn)
-                .orElseThrow(() -> new RuntimeException("Owner not found with tax number: " + tpn));
+        return ownerRepository.findByUsername(username);
     }
 }
 

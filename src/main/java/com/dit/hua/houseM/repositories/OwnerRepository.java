@@ -11,13 +11,9 @@ import java.util.Optional;
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
     Optional<Owner> findByUsername(String username);
+    List<Owner> findByFirstNameOrderByFirstNameAsc(String firstName);
 
-    Optional<Owner> findByEmail(String email);
+    List<Owner> findByLastNameOrderByLastNameAsc(String lastName);
 
-    Optional<Owner> findByTpn(String tpn);
-
-    List<Owner> findByApproved(boolean approved);
-
-    List<Owner> findByApprovedTrue();
 }
 

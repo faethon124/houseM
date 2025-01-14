@@ -28,8 +28,9 @@ public class RenterService {
     }
 
     // Find renters by username
-    public List<Renter> findByUsername(String username) {
-        return renterRepository.findByUsername(username);
+    public Renter findByUsername(String username) {
+        return renterRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Renter not found with username: " + username));
     }
 
     // Find renters by email

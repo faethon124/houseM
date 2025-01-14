@@ -9,6 +9,7 @@ import com.dit.hua.houseM.repositories.OwnerRepository;
 import com.dit.hua.houseM.repositories.PropertyRepository;
 import com.dit.hua.houseM.repositories.RenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public class AdminService {
     private final RenterRepository renterRepository;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     public AdminService(AdminRepository adminRepository, PropertyRepository propertyRepository,
                         OwnerRepository ownerRepository, RenterRepository renterRepository) {
         this.adminRepository = adminRepository;
@@ -29,10 +33,12 @@ public class AdminService {
         this.ownerRepository = ownerRepository;
         this.renterRepository = renterRepository;
     }
-
-    // Admin CRUD operations
-    public List<Admin> findAllAdmins() {
-        return adminRepository.findAll();
+    // Check if credentials match the single admin's username and password
+    public boolean isSingleAdmin(String username, String rawPassword) {
+        Admin admin = adminRepository.findFirstBy(); // Fetch the single admin
+        return admin != null
+                && admin.getUsername().equals(username)
+                && passwordEncoder.matches(rawPassword, admin.getPassword());
     }
 
     public Admin findAdminById(Long id) {
@@ -40,17 +46,6 @@ public class AdminService {
                 .orElseThrow(() -> new RuntimeException("Admin not found with ID: " + id));
     }
 
-    public Admin findAdminByUsername(String username) {
-        return adminRepository.findByUsername(username);
-    }
-
-    public Admin saveAdmin(Admin admin) {
-        return adminRepository.save(admin);
-    }
-
-    public void deleteAdmin(Long id) {
-        adminRepository.deleteById(id);
-    }
 
     // Admin functionality
     public List<Property> findAllUnapprovedProperties() {

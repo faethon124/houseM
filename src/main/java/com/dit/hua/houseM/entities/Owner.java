@@ -6,6 +6,7 @@ import java.util.List;
 public class Owner extends BaseUser{
     @OneToMany(mappedBy = "owner",cascade = {CascadeType.ALL})
     private List<Property>properties;
+
     @OneToMany(mappedBy = "owner",cascade = {CascadeType.ALL})
     private List<ApplicationForm>Applicationforms;
 
