@@ -51,6 +51,7 @@ public class PropertyRestController {
     // Add a new property
     @PostMapping
     public Property addProperty(@RequestBody Property property) {
+        System.out.println(property); // Log the incoming payload
         return propertyService.save(property);
     }
 

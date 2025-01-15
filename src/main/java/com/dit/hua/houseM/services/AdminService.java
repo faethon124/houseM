@@ -63,9 +63,9 @@ public class AdminService {
         propertyRepository.deleteById(propertyId);
     }
 
-    public List<Owner> findAllApprovedOwners() {
-        return ownerRepository.findByApprovedTrue();
-    }
+//    public List<Owner> findAllApprovedOwners() {
+//        return ownerRepository.findByApprovedTrue();
+//    }
 
     public List<Renter> findAllApprovedRenters() {
         return renterRepository.findByApprovedTrue();

@@ -1,5 +1,6 @@
 package com.dit.hua.houseM.entities;
 
+import com.dit.hua.houseM.enums.Role;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +19,10 @@ public class Admin {
     private String password;
     public Admin() {
     }
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_ADMIN;
+
     public Admin(int id,String username,String password) {
         this.id = id;
         this.username = username;

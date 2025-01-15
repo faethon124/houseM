@@ -40,8 +40,8 @@ public class OwnerService {
         return ownerRepository.findByLastNameOrderByLastNameAsc(lastName);
     }
 
-    public Owner findByUsername(String username) {
-        return ownerRepository.findByUsername(username);
-    }
+//    public Owner findByUsername(String username) {
+//        return ownerRepository.findByUsername(username);
+//    }
 }
 

@@ -55,9 +55,9 @@ public class RenterRestController {
         return renterService.findByTpn(tpn);
     }
 
-    // Add a new renter
     @PostMapping
     public Renter addRenter(@RequestBody Renter renter) {
+        System.out.println(renter); // Log the incoming payload
         return renterService.save(renter);
     }
 

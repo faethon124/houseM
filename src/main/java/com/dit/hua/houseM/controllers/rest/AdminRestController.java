@@ -42,10 +42,10 @@ public class AdminRestController {
         return "Property rejected and deleted.";
     }
 
-    @GetMapping("/approved-owners")
-    public List<Owner> getAllApprovedOwners() {
-        return adminService.findAllApprovedOwners();
-    }
+//    @GetMapping("/approved-owners")
+//    public List<Owner> getAllApprovedOwners() {
+//        return adminService.findAllApprovedOwners();
+//    }
 
     @GetMapping("/approved-renters")
     public List<Renter> getAllApprovedRenters() {

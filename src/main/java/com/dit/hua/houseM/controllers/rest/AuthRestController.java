@@ -38,10 +38,10 @@ public class AuthRestController {
 
         // Check if user exists as an owner
         // Check if user exists as an owner
-        Owner owner = ownerService.findByUsername(authRequest.getUsername());
-        if (owner != null && passwordEncoder.matches(authRequest.getPassword(), owner.getPassword())) {
-            return ResponseEntity.ok(new AuthResponse("Owner", owner.getId(), "Login successful"));
-        }
+//        Owner owner = ownerService.findByUsername(authRequest.getUsername());
+//        if (owner != null && passwordEncoder.matches(authRequest.getPassword(), owner.getPassword())) {
+//            return ResponseEntity.ok(new AuthResponse("Owner", owner.getId(), "Login successful"));
+//        }
 
         // Check if user exists as a renter
         Renter renter = renterService.findByUsername(authRequest.getUsername());

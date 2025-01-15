@@ -1,6 +1,7 @@
 package com.dit.hua.houseM.controllers.rest;
 
 import com.dit.hua.houseM.entities.Owner;
+import com.dit.hua.houseM.entities.Property;
 import com.dit.hua.houseM.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,10 +34,11 @@ public class OwnerRestController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/new")
-    public Owner addOwner(@RequestBody Owner owner) {
-        return ownerService.save(owner);
-    }
+//    @PostMapping
+//    public Owner addOwner(@RequestBody Owner owner) {
+//        System.out.println(owner); // Log the incoming payload
+//        return ownerService.save(owner);
+//    }
 
     @PostMapping
     public ResponseEntity<Owner> createOwner(@RequestBody Owner owner) {

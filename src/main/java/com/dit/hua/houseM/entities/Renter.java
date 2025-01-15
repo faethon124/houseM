@@ -1,5 +1,6 @@
 package com.dit.hua.houseM.entities;
 
+import com.dit.hua.houseM.enums.Role;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,6 +14,9 @@ public class Renter extends BaseUser{
 
     @OneToMany(mappedBy = "renter",cascade = CascadeType.ALL)
     private List<ApplicationForm>applicationForms;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_RENTER;;
 
     public Property getProperties() {
         return properties;

@@ -1,6 +1,7 @@
 package com.dit.hua.houseM.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,35 +11,49 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // Define the PasswordEncoder bean
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Define the SecurityFilterChain bean
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF for development purposes
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity (enable in production with proper configuration)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Allow public access to authentication endpoints
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN") // Only ADMIN can access admin endpoints
-                        .requestMatchers("/api/owners/**").hasAnyRole("ADMIN", "OWNER") // Owners and Admins can access owner endpoints
-                        .requestMatchers("/api/renters/**").hasAnyRole("ADMIN", "RENTER") // Renters and Admins can access renter endpoints
-                        .anyRequest().authenticated() // Require authentication for all other endpoints
+                        // Authentication endpoints are open to everyone
+                        .requestMatchers("/api/auth/**").permitAll()
+
+                        // Admins have full access
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/owners/**").hasRole("ADMIN")
+                        .requestMatchers("/api/renters/**").hasRole("ADMIN")
+                        .requestMatchers("/api/properties/**").hasAnyRole("ADMIN", "RENTER")
+                        .requestMatchers("/api/application-forms/**").hasRole("ADMIN")
+
+                        // Owners can access their properties and manage applications
+                        .requestMatchers("/api/owners/properties/**").hasRole("OWNER")
+                        .requestMatchers("/api/application-forms/owners/**").hasRole("OWNER")
+
+                        // Renters can view properties and create applications
+//                        .requestMatchers("/api/properties/**").hasRole("RENTER")
+                        .requestMatchers("/api/application-forms/renters/**").hasRole("RENTER")
+
+                        // All other requests require authentication
+                        .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> {}) // Use HTTP Basic authentication
-                .formLogin(formLogin -> formLogin.disable()); // Disable default form login
+                .httpBasic(httpBasic -> {}) // Use HTTP Basic Authentication
+                .formLogin(formLogin -> formLogin.disable()); // Disable default login page
+
         return http.build();
     }
 
-    // Define the AuthenticationManager bean
     @Bean
-    public AuthenticationConfiguration authenticationConfiguration() {
-        return new AuthenticationConfiguration();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }
+
 
 //    @Bean
 //    public WebSecurityCustomizer webSecurityCustomizer() {
