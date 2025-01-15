@@ -65,7 +65,7 @@
 		</dependency>
 
 
-			<!-- Springdoc OpenAPI for Spring Boot 3.x -->
+
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>
