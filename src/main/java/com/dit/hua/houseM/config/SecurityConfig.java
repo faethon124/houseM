@@ -53,11 +53,31 @@ public class SecurityConfig {
 //    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
 //        return authConfig.getAuthenticationManager();
 //    }
-        @Bean
-        public WebSecurityCustomizer webSecurityCustomizer() {
-            return (web) -> web.ignoring().requestMatchers("/api/**");  // You can specify the URLs you want to ignore here.
-        }
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+            .csrf(csrf -> csrf.disable()) // Disable CSRF for development purposes
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/public/**", "/owners/**").permitAll() // Allow public access to these endpoints
+                    .anyRequest().authenticated() // Require authentication for all other endpoints
+            )
+            .formLogin(form -> form
+                    .loginPage("/login") // Custom login page (if needed)
+                    .permitAll()
+            )
+            .logout(logout -> logout
+                    .permitAll()
+            );
+
+    return http.build();
 }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/api/**", "/h2-console/**"); // Ignore security for API routes and H2 console
+    }
+}
+
 
 
 
