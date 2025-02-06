@@ -28,6 +28,11 @@ public class OwnerWebController {
         return "owners"; // This corresponds to the owners.html template
     }
 
+    @GetMapping("/owner/dashboard")
+    public String ownerDashboard() {
+        return "owner-dashboard"; // Name of the Thymeleaf template (owner-dashboard.html)
+    }
+
     @GetMapping("/search/by-first-name")
     public String getOwnersByFirstName(@RequestParam String firstName, Model model) {
         List<Owner> owners = ownerService.findByFirstNameOrderByFirstNameAsc(firstName);
