@@ -1,6 +1,5 @@
 package com.dit.hua.houseM.controllers.thymeleaf;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,16 +15,19 @@ public class AuthController {
         this.restTemplate = restTemplate;
     }
 
+    // Display the login page
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "login"; // Returns login view
     }
 
+    // Display the signup page
     @GetMapping("/signup")
     public String signup() {
-        return "signup";
+        return "signup"; // Returns signup view
     }
 
+    // Handle signup form submission
     @PostMapping("/signup")
     public String registerUser(@RequestParam String username,
                                @RequestParam String email,
@@ -37,19 +39,19 @@ public class AuthController {
         } else if ("RENTER".equalsIgnoreCase(role)) {
             url = "http://localhost:8080/renters/add";
         } else {
-            return "redirect:/signup?error=invalid_role";
+            return "redirect:/signup?error=invalid_role"; // If the role is invalid
         }
 
-        // Create a request payload
+        // Create a request payload for registration
         var request = new RegistrationRequest(username, email, password);
 
         // Send POST request to the respective controller
         restTemplate.postForObject(url, request, Void.class);
 
-        return "redirect:/login?success";
+        return "redirect:/login?success"; // Redirect to login after successful signup
     }
 
-    // DTO class for sending data
+    // DTO class for sending registration data
     private static class RegistrationRequest {
         public String username;
         public String email;
@@ -62,5 +64,6 @@ public class AuthController {
         }
     }
 }
+
 
 
