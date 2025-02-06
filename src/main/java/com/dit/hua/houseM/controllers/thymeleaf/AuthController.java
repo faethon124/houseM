@@ -18,7 +18,7 @@ public class AuthController {
         // Authenticate user and get role (pseudo-code)
         String role = authenticateUser(username, password);
 
-        if ("OWNER".equals(role)) {
+        if ("OWNER".equals(role) ) {
             return "redirect:/owner/dashboard"; // Redirect to owner dashboard
         } else if ("ROLE_RENTER".equalsIgnoreCase(role)) {
             return "redirect:/renter/properties"; // Redirect to renter properties page
