@@ -1,3 +1,45 @@
+//package com.dit.hua.houseM.config;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.web.SecurityFilterChain;
+//
+//@Configuration
+//@EnableWebSecurity
+//public class SecurityConfig {
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/", "/home", "/login", "/signup").permitAll() // Public access
+//                        .requestMatchers("/owner/**").hasRole("OWNER") // Only users with ROLE_OWNER can access
+//                        .requestMatchers("/renter/**").hasRole("RENTER") // Only users with ROLE_RENTER can access
+//                        .anyRequest().authenticated()
+//                )
+//                .formLogin(form -> form
+//                        .loginPage("/login") // Custom login page
+//                        .loginProcessingUrl("/login") // URL to process login form
+//                        .defaultSuccessUrl("/home") // Default page after successful login
+//                        .failureUrl("/login?error=true") // Redirect to login page on failure
+//                        .permitAll()
+//                )
+//                .logout(logout -> logout
+//                        .logoutSuccessUrl("/login?logout") // Redirect to login page after logout
+//                        .permitAll()
+//                );
+//
+//        return http.build();
+//    }
+//}
 package com.dit.hua.houseM.config;
 
 import org.springframework.context.annotation.Bean;

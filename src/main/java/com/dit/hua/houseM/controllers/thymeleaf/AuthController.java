@@ -4,64 +4,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class AuthController {
 
-    private final RestTemplate restTemplate;
-
-    public AuthController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    // Display the login page
     @GetMapping("/login")
     public String login() {
         return "login"; // Returns login view
     }
 
-    // Display the signup page
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup"; // Returns signup view
-    }
+    @PostMapping("/login")
+    public String handleLogin(@RequestParam String username, @RequestParam String password) {
+        // Authenticate user and get role (pseudo-code)
+        String role = authenticateUser(username, password);
 
-    // Handle signup form submission
-    @PostMapping("/signup")
-    public String registerUser(@RequestParam String username,
-                               @RequestParam String email,
-                               @RequestParam String password,
-                               @RequestParam String role) {
-        String url;
-        if ("OWNER".equalsIgnoreCase(role)) {
-            url = "http://localhost:8080/owners/add";
-        } else if ("RENTER".equalsIgnoreCase(role)) {
-            url = "http://localhost:8080/renters/add";
+        if ("OWNER".equals(role)) {
+            return "redirect:/owner/dashboard"; // Redirect to owner dashboard
+        } else if ("ROLE_RENTER".equalsIgnoreCase(role)) {
+            return "redirect:/renter/properties"; // Redirect to renter properties page
         } else {
-            return "redirect:/signup?error=invalid_role"; // If the role is invalid
+            return "redirect:/login?error=invalid_credentials"; // Redirect back to login with error
         }
-
-        // Create a request payload for registration
-        var request = new RegistrationRequest(username, email, password);
-
-        // Send POST request to the respective controller
-        restTemplate.postForObject(url, request, Void.class);
-
-        return "redirect:/login?success"; // Redirect to login after successful signup
     }
 
-    // DTO class for sending registration data
-    private static class RegistrationRequest {
-        public String username;
-        public String email;
-        public String password;
-
-        public RegistrationRequest(String username, String email, String password) {
-            this.username = username;
-            this.email = email;
-            this.password = password;
-        }
+    private String authenticateUser(String username, String password) {
+        // Implement your authentication logic here
+        // This is just a placeholder
+        // In a real application, you would query the database or use Spring Security
+        return "ROLE_RENTER"; // or "ROLE_OWNER"
     }
 }
 
