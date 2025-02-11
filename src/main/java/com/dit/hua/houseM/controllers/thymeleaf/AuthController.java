@@ -34,6 +34,3 @@ public class AuthController {
         return "ROLE_RENTER"; // or "ROLE_OWNER"
     }
 }
-
-
-

@@ -15,5 +15,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
     List<Owner> findByLastNameOrderByLastNameAsc(String lastName);
 
+    List<Owner> findByLastNameOrderByUsernameAsc(String username);
 }
 
