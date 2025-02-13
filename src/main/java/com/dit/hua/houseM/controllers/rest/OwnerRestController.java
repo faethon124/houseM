@@ -104,6 +104,6 @@ public class OwnerRestController {
 
     @GetMapping("/search/by-username")
     public List<Owner> getOwnersByUsername(@RequestParam String username) {
-        return ownerService.findByLastNameOrderByUsernameAsc(username);
+        return ownerService.findByUsernameOrderByUsernameAsc(username);
     }
 }

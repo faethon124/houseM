@@ -39,12 +39,16 @@ public class OwnerService {
     public List<Owner> findByLastNameOrderByLastNameAsc(String lastName) {
         return ownerRepository.findByLastNameOrderByLastNameAsc(lastName);
     }
-
-    public List<Owner> findByLastNameOrderByUsernameAsc(String username) {
-        return ownerRepository.findByLastNameOrderByUsernameAsc(username);
-    }
-//    public Owner findByUsername(String username) {
-//        return ownerRepository.findByUsername(username);
+//
+//    public List<Owner> findByOrderByUsernameAsc(String username) {
+//        return ownerRepository.findByLastNameOrderByUsernameAsc(username);
 //    }
+public List<Owner> findByUsernameOrderByUsernameAsc(String username) {
+    return ownerRepository.findByUsernameOrderByUsernameAsc(username);
+}
+    public Owner findByUsername(String username) {
+        return ownerRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Owner not found"));
+    }
 }
 

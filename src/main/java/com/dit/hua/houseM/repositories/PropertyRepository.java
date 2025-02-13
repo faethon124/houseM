@@ -15,4 +15,6 @@ public interface PropertyRepository extends JpaRepository<Property,Long> {
     List<Property> findByCity(String city);
 
     List<Property> findByApprovedFalse(); // For admin to fetch unapproved properties
+
+    List<Property> findByOwnerId(Long ownerId);
 }

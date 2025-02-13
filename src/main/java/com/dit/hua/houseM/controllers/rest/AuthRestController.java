@@ -38,7 +38,7 @@ public class AuthRestController {
 
         // Check if user exists as an owner
         // Check if user exists as an owner
-            Owner owner = (Owner) ownerService.findByLastNameOrderByUsernameAsc(authRequest.getUsername().toString());
+            Owner owner = (Owner) ownerService.findByUsernameOrderByUsernameAsc(authRequest.getUsername().toString());
             if (owner != null && passwordEncoder.matches(authRequest.getPassword(), owner.getPassword())) {
                 return ResponseEntity.ok(new AuthResponse("Owner", owner.getId(), "Login successful"));
             }

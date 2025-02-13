@@ -44,6 +44,9 @@ public class PropertyService {
         return propertyRepository.findByApprovedFalse();
     }
 
+    public List<Property> findPropertiesByOwnerId(Long ownerId) {
+        return propertyRepository.findByOwnerId(ownerId);
+    }
     // Save a new or updated property
     public Property save(Property property) {
         return propertyRepository.save(property);

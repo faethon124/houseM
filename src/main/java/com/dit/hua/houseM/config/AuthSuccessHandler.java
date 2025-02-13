@@ -20,7 +20,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         for (GrantedAuthority authority : authorities) {
             String role = authority.getAuthority();
             if (role.equals("ROLE_OWNER")) {
-                response.sendRedirect("owners/owner/dashboard");
+                response.sendRedirect("owners/dashboard");
                 return;
             } else if (role.equals("ROLE_RENTER")) {
                 response.sendRedirect("renter/properties");

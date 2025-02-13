@@ -33,4 +33,8 @@ public class AuthController {
         // In a real application, you would query the database or use Spring Security
         return "ROLE_RENTER"; // or "ROLE_OWNER"
     }
+    @GetMapping("/sign-up")
+    public String signup() {
+        return "sign-up"; // Returns login view
+    }
 }
