@@ -18,6 +18,16 @@ public class Renter extends BaseUser{
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_RENTER;;
 
+    public Renter(String username, String email, String password) {
+        super(username, email, password);
+        this.role = Role.ROLE_RENTER;
+    }
+
+    public Renter() {
+        super();
+    }
+
+
     public Property getProperties() {
         return properties;
     }

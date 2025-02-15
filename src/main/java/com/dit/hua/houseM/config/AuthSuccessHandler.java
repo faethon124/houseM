@@ -23,7 +23,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
                 response.sendRedirect("owners/dashboard");
                 return;
             } else if (role.equals("ROLE_RENTER")) {
-                response.sendRedirect("renter/properties");
+                response.sendRedirect("renters/dashboard");
                 return;
             }
         }

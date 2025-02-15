@@ -1,5 +1,6 @@
 package com.dit.hua.houseM.entities;
 
+import com.dit.hua.houseM.enums.ApplicationStatus;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,10 @@ public class ApplicationForm {
     @Column(name="date")
     private  Date  date;
 
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatus status;
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "owner_id")
     private Owner owner;
@@ -42,7 +47,7 @@ public class ApplicationForm {
     @JoinColumn(name = "property_id")
     private Property property;
 
-    public ApplicationForm(int id, String firstName, String lastName, String email, String phone, String username, String password, String TPN, Date date, String katoikia) {
+    public ApplicationForm(int id, String firstName, String lastName, String email, String phone, String username, String password, String TPN, Date date) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,6 +55,7 @@ public class ApplicationForm {
         this.phone = phone;
         this.TPN = TPN;
         this.date = date;
+
     }
 
     public ApplicationForm() {
@@ -126,6 +132,14 @@ public class ApplicationForm {
     public void setProperty(Property property) {
         this.property = property;
     }
+    public ApplicationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+
 
     @Override
     public String toString() {

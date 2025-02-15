@@ -40,6 +40,7 @@ public class ApplicationFormRestController {
         return ResponseEntity.ok(forms);
     }
 
+
     // Retrieve a specific application form by ID
     @GetMapping("/{id}")
     public ResponseEntity<ApplicationForm> getApplicationFormById(@PathVariable int id) {
@@ -53,5 +54,30 @@ public class ApplicationFormRestController {
         applicationFormService.deleteApplicationForm(id);
         return ResponseEntity.noContent().build();
     }
+
+//    @PutMapping("/{id}/approve")
+//    public ResponseEntity<ApplicationForm> approveApplicationForm(@PathVariable int id) {
+//        ApplicationForm form = applicationFormService.getApplicationFormById(id);
+//        if (form != null) {
+//            form.setApproved(true);
+//            applicationFormService.saveApplicationForm(form);
+//            return ResponseEntity.ok(form);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
+//
+//
+//    @PutMapping("/{id}/reject")
+//    public ResponseEntity<ApplicationForm> rejectApplicationForm(@PathVariable int id) {
+//        ApplicationForm form = applicationFormService.getApplicationFormById(id);
+//        if (form != null) {
+//            form.setApproved(false);
+//            applicationFormService.saveApplicationForm(form);
+//            return ResponseEntity.ok(form);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
+
+
 }
 

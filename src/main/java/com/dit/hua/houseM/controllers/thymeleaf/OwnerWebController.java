@@ -1,7 +1,10 @@
 package com.dit.hua.houseM.controllers.thymeleaf;
 
+import com.dit.hua.houseM.entities.ApplicationForm;
 import com.dit.hua.houseM.entities.Owner;
 import com.dit.hua.houseM.entities.Property;
+import com.dit.hua.houseM.enums.ApplicationStatus;
+import com.dit.hua.houseM.services.ApplicationFormService;
 import com.dit.hua.houseM.services.OwnerService;
 import com.dit.hua.houseM.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.util.List;
 
@@ -19,10 +21,12 @@ public class OwnerWebController {
 
     private final OwnerService ownerService;
     private final PropertyService propertyService;
+    private final ApplicationFormService applicationFormService;
     @Autowired
-    public OwnerWebController(OwnerService ownerService,PropertyService propertyService) {
+    public OwnerWebController(OwnerService ownerService,PropertyService propertyService,ApplicationFormService applicationFormService) {
         this.ownerService = ownerService;
         this.propertyService = propertyService;
+        this.applicationFormService = applicationFormService;
     }
 //    @GetMapping("/dashboard")
 //    public String ownerDashboard(Model model) {
@@ -34,7 +38,10 @@ public class OwnerWebController {
     public String ownerDashboard(Model model, Principal principal) {
         Owner owner = ownerService.findByUsername(principal.getName()); // Επιστρέφει έναν Owner
         List<Property> properties = propertyService.findPropertiesByOwnerId(owner.getId());
+        List<ApplicationForm> applications = applicationFormService.getApplicationFormsByOwner(owner.getId());
+
         model.addAttribute("properties", properties);
+        model.addAttribute("applications", applications);
         return "owner-dashboard";
     }
 //    @PostMapping("/add-property")
@@ -144,6 +151,11 @@ public class OwnerWebController {
 //        propertyService.update(id, updatedProperty);
 //        return "redirect:/owner/dashboard";
 //    }
+    @PostMapping("/rental/status")
+    public String changeApplicationStatus(@RequestParam int applicationId, @RequestParam ApplicationStatus status) {
+    applicationFormService.updateApplicationStatus(applicationId, status);
 
+    return "redirect:/owners/dashboard";
+}
 
 }

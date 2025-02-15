@@ -32,10 +32,15 @@ public abstract class BaseUser {
     @Column(name = "approved", nullable = false)
     private boolean approved = false;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    public BaseUser() {
     }
+
+    public BaseUser(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -103,5 +108,9 @@ public abstract class BaseUser {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

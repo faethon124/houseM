@@ -5,36 +5,40 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="Admin")
-public class Admin {
-
+public class Admin extends BaseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    private Long id;
 
     @Column(name="username")
     private String username;
 
     @Column(name="password")
     private String password;
-    public Admin() {
-    }
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.ROLE_ADMIN;
 
-    public Admin(int id,String username,String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-
+    public Admin() {
+        super();
+        this.setRole(Role.ROLE_ADMIN);
     }
 
-    public int getId() {
+    public Admin(String username, String email, String password) {
+        super(username, email, password);
+        this.setRole(Role.ROLE_ADMIN);
+    }
+
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -54,8 +58,24 @@ public class Admin {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "Admin [id=" + id + ", username=" + username + ", password=" + password + "]";
+        return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role=" + role +"]";
     }
 }

@@ -19,9 +19,9 @@ public class AuthController {
         String role = authenticateUser(username, password);
 
         if ("OWNER".equals(role) ) {
-            return "redirect:/owner/dashboard"; // Redirect to owner dashboard
-        } else if ("ROLE_RENTER".equalsIgnoreCase(role)) {
-            return "redirect:/renter/properties"; // Redirect to renter properties page
+            return "redirect:/owners/dashboard"; // Redirect to owner dashboard
+        } else if ("RENTER".equals(role)) {
+            return "redirect:/renters/dashboard"; // Redirect to renter properties page
         } else {
             return "redirect:/login?error=invalid_credentials"; // Redirect back to login with error
         }
@@ -31,10 +31,7 @@ public class AuthController {
         // Implement your authentication logic here
         // This is just a placeholder
         // In a real application, you would query the database or use Spring Security
-        return "ROLE_RENTER"; // or "ROLE_OWNER"
+        return "ROLE_OWNER"; // or "ROLE_OWNER"
     }
-    @GetMapping("/sign-up")
-    public String signup() {
-        return "sign-up"; // Returns login view
-    }
+
 }
