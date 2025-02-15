@@ -54,7 +54,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
         return new CustomUserDetails(renter.get().getUsername(), renter.get().getPassword(), "ROLE_RENTER");
     }
 
-    // Αν δεν βρεθεί ο χρήστης, ρίχνουμε εξαίρεση
+
     throw new UsernameNotFoundException("User not found with username: " + username);
 }
     }
