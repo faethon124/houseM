@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
@@ -21,21 +23,38 @@ public class CustomUserDetailService implements UserDetailsService {
         this.renterRepository = renterRepository;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Fetch the owner using the repository
-        Owner owner = ownerRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
-        // Create and return a UserDetails object
-        return new CustomUserDetails(owner.getUsername(), owner.getPassword(), "ROLE_OWNER");
-    }
-// TODO the same for owner
-
-//        Renter renter = renterRepository.findByUsername(username).orElse(null);
-//        if (renter != null) {
-//            return new CustomUserDetails(renter.getUsername(), renter.getPassword(), "ROLE_RENTER");
-//        }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        // Fetch the owner using the repository
+//        Owner owner = ownerRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+//        // Create and return a UserDetails object
+//        return new CustomUserDetails(owner.getUsername(), owner.getPassword(), "ROLE_OWNER");
+//    }
 //
-//        throw new UsernameNotFoundException("User not found with username: " + username);
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        // Fetch the owner using the repository
+//        Renter renter = renterRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+//        // Create and return a UserDetails object
+//        return new CustomUserDetails(renter.getUsername(), renter.getPassword(), "ROLE_RENTER");
+//    }
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    // Έλεγχος αν είναι Owner
+    Optional<Owner> owner = ownerRepository.findByUsername(username);
+    if (owner.isPresent()) {
+        return new CustomUserDetails(owner.get().getUsername(), owner.get().getPassword(), "ROLE_OWNER");
     }
 
+    // Έλεγχος αν είναι Renter
+    Optional<Renter> renter = renterRepository.findByUsername(username);
+    if (renter.isPresent()) {
+        return new CustomUserDetails(renter.get().getUsername(), renter.get().getPassword(), "ROLE_RENTER");
+    }
+
+    // Αν δεν βρεθεί ο χρήστης, ρίχνουμε εξαίρεση
+    throw new UsernameNotFoundException("User not found with username: " + username);
+}
+    }

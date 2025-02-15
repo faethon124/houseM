@@ -39,7 +39,7 @@ public class RenterWebController {
 
         model.addAttribute("properties", properties);
         model.addAttribute("applications", applications);
-        return "renter-dashboard"; // This will render renter-dashboard.html
+        return "renter-dashboard";
     }
 
     // Add an Application Form
