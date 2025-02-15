@@ -34,7 +34,7 @@ public class RenterWebController {
     @GetMapping("/dashboard")
     public String renterDashboard(Model model, Principal principal) {
         Renter renter = renterService.findByUsername(principal.getName());
-        List<Property> properties = propertyService.findAll();
+        List<Property> properties = propertyService.findAll(); // Δείχνουμε όλα τα properties
         List<ApplicationForm> applications = applicationFormService.getApplicationFormsByRenter(renter.getId());
 
         model.addAttribute("properties", properties);
@@ -42,16 +42,58 @@ public class RenterWebController {
         return "renter-dashboard";
     }
 
+
     // Add an Application Form
+//    @PostMapping("/add-application")
+//    public String addApplicationForm(@ModelAttribute ApplicationForm applicationForm, Principal principal) {
+//        Renter renter = renterService.findByUsername(principal.getName());
+//        applicationForm.setRenter(renter); // Link to the renter
+//        applicationFormService.saveApplicationForm(applicationForm);
+//        return "redirect:/renters/dashboard"; // Redirect to renter dashboard after adding
+//    }
     @PostMapping("/add-application")
-    public String addApplicationForm(@ModelAttribute ApplicationForm applicationForm, Principal principal) {
+    public String addApplicationForm(@ModelAttribute ApplicationForm applicationForm,
+                                     @RequestParam Long propertyId,
+                                     Principal principal) {
         Renter renter = renterService.findByUsername(principal.getName());
-        applicationForm.setRenter(renter); // Link to the renter
+        Property property = propertyService.findById(propertyId);
+
+        applicationForm.setRenter(renter);
+        applicationForm.setProperty(property);
+
         applicationFormService.saveApplicationForm(applicationForm);
-        return "redirect:/renters/dashboard"; // Redirect to renter dashboard after adding
+
+        return "redirect:/renters/dashboard";
     }
 
-    // Update Application Form (status change or details)
+
+//    // Update Application Form (status change or details)
+//    @PostMapping("/update-application")
+//    public String updateApplicationForm(@RequestParam int applicationId,
+//                                        @ModelAttribute ApplicationForm updatedApplicationForm,
+//                                        Principal principal) {
+//        Renter renter = renterService.findByUsername(principal.getName());
+//        ApplicationForm existingApplication = applicationFormService.getApplicationFormById(applicationId);
+//
+//
+//        if (existingApplication == null || !existingApplication.getRenter().getId().equals(renter.getId())) {
+//            return "redirect:/renters/dashboard?error=unauthorized";
+//        }
+//
+//
+//        updatedApplicationForm.setStatus(existingApplication.getStatus());
+//
+//
+//        existingApplication.setProperty(updatedApplicationForm.getProperty());
+//
+//
+//        // existingApplication.setOtherField(updatedApplicationForm.getOtherField());
+//
+//        applicationFormService.saveApplicationForm(existingApplication);
+//
+//        return "redirect:/renters/dashboard";
+//    }
+
     @PostMapping("/update-application")
     public String updateApplicationForm(@RequestParam int applicationId,
                                         @ModelAttribute ApplicationForm updatedApplicationForm,
@@ -59,19 +101,13 @@ public class RenterWebController {
         Renter renter = renterService.findByUsername(principal.getName());
         ApplicationForm existingApplication = applicationFormService.getApplicationFormById(applicationId);
 
-
         if (existingApplication == null || !existingApplication.getRenter().getId().equals(renter.getId())) {
             return "redirect:/renters/dashboard?error=unauthorized";
         }
 
-
-        updatedApplicationForm.setStatus(existingApplication.getStatus());
-
-
-        existingApplication.setProperty(updatedApplicationForm.getProperty());
-
-
-        // existingApplication.setOtherField(updatedApplicationForm.getOtherField());
+        // Δεν αλλάζουμε το status
+        existingApplication.setDate(updatedApplicationForm.getDate());
+        existingApplication.setTPN(updatedApplicationForm.getTPN());
 
         applicationFormService.saveApplicationForm(existingApplication);
 
