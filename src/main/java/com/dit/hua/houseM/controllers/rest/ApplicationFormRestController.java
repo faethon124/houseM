@@ -28,7 +28,7 @@ public class ApplicationFormRestController {
 
     // Retrieve all application forms (Owner action)
     @GetMapping
-    public ResponseEntity<List<ApplicationForm>> getAllApplicationForms() {
+    public ResponseEntity<List<ApplicationForm>> submitApplicationForm() {
         List<ApplicationForm> forms = applicationFormService.getAllApplicationForms();
         return ResponseEntity.ok(forms);
     }
