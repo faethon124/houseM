@@ -41,6 +41,17 @@ public abstract class BaseUser {
         this.password = password;
     }
 
+    public BaseUser(String firstName, String lastName, String username, String password, String email, String tpn,
+                    String phone, boolean approved) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.tpn = tpn;
+        this.phone = phone;
+        this.approved = approved;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -114,3 +125,4 @@ public abstract class BaseUser {
         return id;
     }
 }
+

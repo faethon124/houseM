@@ -6,10 +6,10 @@ import java.util.List;
 
 @Entity
 public class Owner extends BaseUser {
-    @OneToMany(mappedBy = "owner", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "owner", cascade = { CascadeType.ALL })
     private List<Property> properties;
 
-    @OneToMany(mappedBy = "owner", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "owner", cascade = { CascadeType.ALL })
     private List<ApplicationForm> applicationForms;
 
     @Enumerated(EnumType.STRING)
@@ -21,6 +21,12 @@ public class Owner extends BaseUser {
 
     public Owner(String username, String email, String password) {
         super(username, email, password);
+        this.role = Role.ROLE_OWNER;
+    }
+
+    public Owner(String firstName, String lastName, String username, String password, String email,
+                 String tpn, String phone, boolean approved) {
+        super(firstName, lastName, username, password, email, tpn, phone, approved);
         this.role = Role.ROLE_OWNER;
     }
 
