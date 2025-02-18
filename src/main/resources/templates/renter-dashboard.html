@@ -395,19 +395,22 @@
     <table class="table table-bordered">
       <thead>
       <tr>
-        <th>ID</th>
         <th>Address</th>
         <th>City</th>
         <th>Price (€)</th>
+        <th>Zipcode</th>
+        <th>Area</th>
         <th>Type</th>
+
       </tr>
       </thead>
       <tbody>
       <tr th:each="property : ${properties}">
-        <td th:text="${property.id}"></td>
         <td th:text="${property.address}"></td>
         <td th:text="${property.city}"></td>
         <td th:text="${property.price}"></td>
+        <td th:text="${property.zipcode}"></td>
+        <td th:text="${property.area}"></td>
         <td th:text="${property.type}"></td>
       </tr>
       </tbody>
