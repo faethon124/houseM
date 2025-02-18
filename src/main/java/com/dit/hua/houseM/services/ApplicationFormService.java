@@ -2,6 +2,7 @@ package com.dit.hua.houseM.services;
 
 import com.dit.hua.houseM.entities.ApplicationForm;
 import com.dit.hua.houseM.entities.Property;
+import com.dit.hua.houseM.entities.Renter;
 import com.dit.hua.houseM.enums.ApplicationStatus;
 import com.dit.hua.houseM.repositories.ApplicationFormRepository;
 import jakarta.transaction.Transactional;
@@ -50,5 +51,10 @@ public class ApplicationFormService {
             application.setStatus(status);
             applicationFormRepository.save(application);
         });
+    }
+
+    public ApplicationForm getApplicationByRenterAndProperty(Renter renter, Property property) {
+        return applicationFormRepository.findByRenterAndProperty(renter, property)
+                .orElse(null);
     }
 }

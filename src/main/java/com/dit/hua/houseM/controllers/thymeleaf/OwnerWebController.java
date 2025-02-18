@@ -44,6 +44,7 @@ public class OwnerWebController {
         model.addAttribute("applications", applications);
         return "owner-dashboard";
     }
+
 //    @PostMapping("/add-property")
 //    public String addProperty(@RequestParam String address,
 //                              @RequestParam String city,
@@ -151,11 +152,16 @@ public class OwnerWebController {
 //        propertyService.update(id, updatedProperty);
 //        return "redirect:/owner/dashboard";
 //    }
-    @PostMapping("/rental/status")
-    public String changeApplicationStatus(@RequestParam int applicationId, @RequestParam ApplicationStatus status) {
-    applicationFormService.updateApplicationStatus(applicationId, status);
-
+//    @PostMapping("/rental/status")
+//    public String changeApplicationStatus(@RequestParam int applicationId, @RequestParam ApplicationStatus status) {
+//    applicationFormService.updateApplicationStatus(applicationId, status);
+//
+//    return "redirect:/owners/dashboard";
+//}
+@PostMapping("/rental/status")
+public String changeApplicationStatus(@RequestParam int applicationId, @RequestParam String status) {
+    ApplicationStatus newStatus = ApplicationStatus.valueOf(status.toUpperCase());
+    applicationFormService.updateApplicationStatus(applicationId, newStatus);
     return "redirect:/owners/dashboard";
 }
-
 }
