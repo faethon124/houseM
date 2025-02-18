@@ -259,6 +259,9 @@
         <th>Address</th>
         <th>City</th>
         <th>Price</th>
+        <th>Zipcode</th>
+        <th>Area</th>
+        <th>Type</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -268,6 +271,9 @@
         <td th:text="${property.address}"></td>
         <td th:text="${property.city}"></td>
         <td th:text="${property.price}"></td>
+        <td th:text="${property.zipcode}"></td>
+        <td th:text="${property.area}"></td>
+        <td th:text="${property.type}"></td>
         <td>
           <form th:action="@{/owners/delete-property}" method="post" class="d-inline">
             <input type="hidden" name="id" th:value="${property.id}">
